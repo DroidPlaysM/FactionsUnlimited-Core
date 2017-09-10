@@ -26,6 +26,7 @@ class Main extends PluginBase implements Listener {
     $this->getServer()->getScheduler()->scheduleRepeatingTask(new RestartEvent($this), 20);
         
       $this->registerCommands();
+    $this->getLogger()->info(C::GREEN ."Everything Running fine i think :P");
   }
   
   	public function registerCommands(){
