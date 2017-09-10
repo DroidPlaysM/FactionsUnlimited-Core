@@ -1,5 +1,25 @@
 name: FactionsUnlimitedCore
-author: ["DroidPlaysM", ""]
+authors:
+ - DroidPlaysM
+ - jasonwynn10
 main: FacCore\Main
-api: [3.0.0-ALPHA7 , 3.0.0-ALPHA8]
-version: 1.0
+api:
+ - 3.0.0-ALPHA7
+ - 3.0.0-ALPHA8
+version: 0.1.0
+permissions:
+  core:
+    default: false
+    children:
+      core.command:
+        default: op
+        children:
+          core.command.warp:
+            default: true
+            children:
+              warp.*:
+                default: op
+          core.command.spawn:
+              default: true
+          core.command.tpa:
+              default: true

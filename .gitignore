@@ -1,0 +1,5 @@
+.idea/
+.poggit.yml
+!resources/
+config.yml
+warps.yml
