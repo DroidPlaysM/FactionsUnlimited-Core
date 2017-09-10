@@ -22,3 +22,6 @@ class Main extends PluginBase implements Listener {
     $this->getServer()->getScheduler()->scheduleRepeatingTask(new Alerts($this), 2000);
     //RestartEvent
     $this->getServer()->getScheduler()->scheduleRepeatingTask(new RestartEvent($this), 20);
+        
+      $this->registerCommands();
+  }
