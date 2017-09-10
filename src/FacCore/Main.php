@@ -9,4 +9,4 @@ use pocketmine\utils\Config;
 use pocketmine\event\Listener;
 
 use FacCore\Events\RestartEvent;
-use FacCore\Alert\AlertTask;
+use FacCore\Alert\Alerts;
