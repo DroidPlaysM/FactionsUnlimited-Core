@@ -29,3 +29,13 @@ class Main extends PluginBase implements Listener {
   }
   
   	public function registerCommands(){
+    }
+      
+      
+      
+      
+      
+   public function onDisable(){
+     $this->getLogger()->info(C::RED ."Shutting down Factions Core");
+  }
+}
