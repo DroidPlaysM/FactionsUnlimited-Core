@@ -1,5 +1,5 @@
 name: FactionsUnlimitedCore
-author: DroidPlaysM
+author: ["DroidPlaysM", ""]
 main: FacCore\Main
 api: [3.0.0-ALPHA7 , 3.0.0-ALPHA8]
 version: 1.0
