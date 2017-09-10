@@ -26,3 +26,5 @@ class Main extends PluginBase implements Listener {
         
       $this->registerCommands();
   }
+  
+  	public function registerCommands(){
