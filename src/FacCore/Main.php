@@ -19,6 +19,7 @@ class Main extends PluginBase implements Listener {
     $this->saveResource("config.yml");
     $this->saveDefaultConfig();
     $this->getLogger()->info(C::GREEN ."Starting Factions Core ");
+    //Alerts
     $this->getServer()->getScheduler()->scheduleRepeatingTask(new Alerts($this), 2000);
     //RestartEvent
     $this->getServer()->getScheduler()->scheduleRepeatingTask(new RestartEvent($this), 20);
