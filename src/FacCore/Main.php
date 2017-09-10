@@ -10,3 +10,8 @@ use pocketmine\event\Listener;
 
 use FacCore\Events\RestartEvent;
 use FacCore\Alert\Alerts;
+
+class Main extends PluginBase implements Listener {
+  
+  public function onEnable(){
+    $this->getServer()->getPluginManager()->registerEvents($this, $this);
