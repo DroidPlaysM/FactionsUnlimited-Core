@@ -13,7 +13,7 @@ class WarpCommand extends PluginCommand {
 	public function __construct(Main $owner) {
 		parent::__construct($this->getPlugin()->getLanguage()->get("warp.name"), $owner);
 		$this->setUsage($this->getPlugin()->getLanguage()->get("warp.usage"));
-		$this->setPermission("core.command.warp");
+		$this->setPermission("core.command.warp.tp");
 		$this->setDescription($this->getPlugin()->getLanguage()->get("warp.desc"));
 	}
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -21,7 +21,7 @@ class WarpCommand extends PluginCommand {
 			return true;
 		}
 		if(!$this->getPlugin()->getWarpsConfig()->exists($args[0])) {
-			$sender->sendMessage(TextFormat::YELLOW.$this->getPlugin()->getLanguage()->translateString("warp.nonexisting", $args[0]));
+			$sender->sendMessage(TextFormat::YELLOW.$this->getPlugin()->getLanguage()->translateString("warp.nonexistant", $args[0]));
 			return true;
 		}
 		$warp = $args[0];
@@ -47,8 +47,8 @@ class WarpCommand extends PluginCommand {
 	public function getPlugin() : Plugin {
 		return parent::getPlugin();
 	}
-	public function getDefaultCommandData() : array {
-		$arr = parent::getDefaultCommandData();
+	public function generateCustomCommandData(Player $player) : array {
+		$arr = parent::generateCustomCommandData($player);
 		$warps = $this->getPlugin()->getWarpsConfig()->getAll(true);
 		$arr["overloads"]["default"]["input"]["parameters"] = [
 			[

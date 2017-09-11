@@ -17,9 +17,15 @@ permissions:
           core.command.warp:
             default: true
             children:
-              warp.*:
+              core.command.warp.add:
                 default: op
+              core.command.warp.remove:
+                default: op
+              core.command.warp.tp:
+                default: true
           core.command.spawn:
-              default: true
+            default: true
           core.command.tpa:
-              default: true
+            default: true
+          core.command.fly:
+            default: op

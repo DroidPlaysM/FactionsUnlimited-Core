@@ -1,6 +1,12 @@
 <?php
 namespace FacCore;
 
+use FacCore\Commands\RemoveWarpCommand;
+use FacCore\Commands\RulesCommand;
+use FacCore\Commands\SetWarpCommand;
+use FacCore\Commands\SpawnCommand;
+use FacCore\Commands\TPACommand;
+use FacCore\Commands\WarpCommand;
 use FacCore\Events\EventListener;
 use FacCore\Tasks\AutoRestartTask;
 use FacCore\Commands\FlyCommand;
@@ -13,41 +19,39 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 
 class Main extends PluginBase implements Listener {
-
 	/** @var BaseLang $baseLang */
 	private $baseLang = null;
-
 	public function onLoad() {
 		$this->getLogger()->notice(TextFormat::GREEN . "Starting Factions Core");
 		$this->saveDefaultConfig();
-	}
-
-	public function onEnable() {
-		$this->getLogger()->notice(base64_decode("ICBfX19fX18gICAgICAgICAgICAgICAgICBfICAgICBfICAgICAgICAgICAgICAgICAgICAgICAgIF8gICAgXyAgICAgICAgICAgXyAgIF8gICAgICAgICAgICAgICBfICAgXyAgICAgICAgICAgICAgICBfICAgIF9fX19fICAgICAgICAgICAgICAgICAgICAgICANCiB8ICBfX19ffCAgICAgICAgICAgICAgICB8IHwgICAoXykgICAgICAgICAgICAgICAgICAgICAgIHwgfCAgfCB8ICAgICAgICAgfCB8IChfKSAgICAgICAgICAgICAoXykgfCB8ICAgICAgICAgICAgICB8IHwgIC8gX19fX3wgICAgICAgICAgICAgICAgICAgICAgDQogfCB8X18gICAgICBfXyBfICAgIF9fXyAgfCB8XyAgIF8gICAgX19fICAgIF8gX18gICAgX19fICB8IHwgIHwgfCAgXyBfXyAgIHwgfCAgXyAgIF8gX18gX19fICAgIF8gIHwgfF8gICAgX19fICAgIF9ffCB8IHwgfCAgICAgICAgX19fICAgIF8gX18gICAgX19fIA0KIHwgIF9ffCAgICAvIF9gIHwgIC8gX198IHwgX198IHwgfCAgLyBfIFwgIHwgJ18gXCAgLyBfX3wgfCB8ICB8IHwgfCAnXyBcICB8IHwgfCB8IHwgJ18gYCBfIFwgIHwgfCB8IF9ffCAgLyBfIFwgIC8gX2AgfCB8IHwgICAgICAgLyBfIFwgIHwgJ19ffCAgLyBfIFwNCiB8IHwgICAgICB8IChffCB8IHwgKF9fICB8IHxfICB8IHwgfCAoXykgfCB8IHwgfCB8IFxfXyBcIHwgfF9ffCB8IHwgfCB8IHwgfCB8IHwgfCB8IHwgfCB8IHwgfCB8IHwgfCB8XyAgfCAgX18vIHwgKF98IHwgfCB8X19fXyAgfCAoXykgfCB8IHwgICAgfCAgX18vDQogfF98ICAgICAgIFxfXyxffCAgXF9fX3wgIFxfX3wgfF98ICBcX19fLyAgfF98IHxffCB8X19fLyAgXF9fX18vICB8X3wgfF98IHxffCB8X3wgfF98IHxffCB8X3wgfF98ICBcX198ICBcX19ffCAgXF9fLF98ICBcX19fX198ICBcX19fLyAgfF98ICAgICBcX19ffA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg"));
-		// Events
-		new EventListener($this);
 		//Messages
 		$lang = $this->getConfig()->get("language", BaseLang::FALLBACK_LANGUAGE);
 		$this->baseLang = new BaseLang($lang, $this->getFile() . "resources/");
-		//TODO: Alerts system
+		//Commands
+		$this->getServer()->getCommandMap()->registerAll($this->getDescription()->getName(), [
+			new FlyCommand($this),
+			new RemoveWarpCommand($this),
+			new RulesCommand($this),
+			new SetWarpCommand($this),
+			new SpawnCommand($this),
+			//new TPACommand($this), //TODO
+			new WarpCommand($this)
+		]);
+	}
+	public function onEnable() {
+		$this->getLogger()->notice(base64_decode("IF9fXyAgICAgICAgICAgICAgICAgIF8gICAgICAgICAgICAgICAgICAgICAgICAgICBfICAgXyAgICAgICAgIF8gICAgICAgICAgICAgICAgICAgICBfICAgICAgICAgICAgICAgXyAgX19fICAgICAgICAgICAgICAgICAgICAgICANCiggIF9gXCAgICAgICAgICAgICAgICggKV8gIF8gICAgICAgICAgICAgICAgICAgICAoICkgKCApICAgICAgIChfICkgIF8gICAgICAgICAgICAgXyAoIClfICAgICAgICAgICAgKCApKCAgX2BcICAgICAgICAgICAgICAgICAgICAgDQp8IChfKF8pICAgXyBfICAgIF9fXyB8ICxfKShfKSAgIF8gICAgIF9fXyAgICBfX18gfCB8IHwgfCAgX19fICAgfCB8IChfKSAgX19fIF9fXyAgKF8pfCAsXykgICBfXyAgICAgX3wgfHwgKCAoXykgICBfICAgIF8gX18gICAgX18gIA0KfCAgXykgICAvJ19gICkgLydfX18pfCB8ICB8IHwgLydfYFwgLycgXyBgXC8nLF9fKXwgfCB8IHwvJyBfIGBcIHwgfCB8IHwvJyBfIGAgXyBgXHwgfHwgfCAgIC8nX19gXCAvJ19gIHx8IHwgIF8gIC8nX2BcICggJ19fKSAvJ19fYFwNCnwgfCAgICAoIChffCB8KCAoX19fIHwgfF8gfCB8KCAoXykgKXwgKCApIHxcX18sIFx8IChfKSB8fCAoICkgfCB8IHwgfCB8fCAoICkgKCApIHx8IHx8IHxfICggIF9fXy8oIChffCB8fCAoXyggKSggKF8pICl8IHwgICAoICBfX18vDQooXykgICAgYFxfXyxfKWBcX19fXylgXF9fKShfKWBcX19fLycoXykgKF8pKF9fX18vKF9fX19fKShfKSAoXykoX19fKShfKShfKSAoXykgKF8pKF8pYFxfXylgXF9fX18pYFxfXyxfKShfX19fLydgXF9fXy8nKF8pICAgYFxfX19fKQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg"));
+		// Events
+		new EventListener($this);
 		//Tasks
 		$this->getServer()->getScheduler()->scheduleDelayedTask(new AutoRestartTask($this), 20 * 60 * 60 * 12); // Delay: 12 Hours
-		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Alerts($this), 2000);
+		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Alerts($this), 2000); // Repeats every 100 seconds
 		//TODO: other tasks
-		//Commands
-
-		$this->getLogger()->info(TextFormat::GREEN . "Everything Running fine i think :P");
-		$this->registerCommands();
 	}
-	public function registerCommands(){
-		$this->getServer()->getCommandMap()->register("fly", new FlyCommand($this));
-	}
-			
 	public function getLanguage() : BaseLang {
 		return $this->baseLang;
 	}
 	public function onDisable() {
-		$this->getLogger()->info(TextFormat::RED ."Shutting down Factions Core");
+		$this->getLogger()->notice(TextFormat::RED ."Shutting down Factions Core");
 	}
 	public function getWarpsConfig() : Config {
 		return new Config($this->getDataFolder()."warps.yml", Config::YAML);

@@ -39,8 +39,8 @@ class SpawnCommand extends PluginCommand {
 	public function getPlugin() : Plugin {
 		return parent::getPlugin();
 	}
-	public function getDefaultCommandData() : array {
-		$arr = parent::getDefaultCommandData();
+	public function generateCustomCommandData(Player $player) : array {
+		$arr = parent::generateCustomCommandData($player);
 		$arr["overloads"]["default"]["input"]["parameters"] = [];
 		return $arr;
 	}
