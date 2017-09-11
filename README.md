@@ -20,6 +20,8 @@ This is a Core for Factions Unlimited server.
   - [ ]  HelpPage
   - [x]  fly
   - [ ] Tpa
+  - [ ]  feed
+  - [ ]  spawn
 - [ ] Finish RestartEvent
 - [x] Finish Alerts
 - [ ] Add HealthBar
