@@ -3,6 +3,9 @@ namespace FacCore;
 
 use FacCore\Events\EventListener;
 use FacCore\Tasks\AutoRestartTask;
+use FacCore\Commands\FlyCommand;
+use FacCore\Alert\Alerts;
+
 use pocketmine\event\Listener;
 use pocketmine\lang\BaseLang;
 use pocketmine\plugin\PluginBase;
