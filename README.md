@@ -13,3 +13,13 @@ This is a Core for Factions Unlimited server.
 
 
 #### TODO List:
+- [ ] Finish Main
+- [ ]  Add commands
+  - [ ]  warp
+  - [x]  fly
+  - [ ] Tpa
+- [ ] Finish RestartEvent
+- [x] Finish Alerts
+- [ ] Add HealthBar
+- [ ] Add BossBar
+- [ ] Add chatFilter
