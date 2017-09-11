@@ -34,7 +34,12 @@ class Main extends PluginBase implements Listener {
 		//Commands
 
 		$this->getLogger()->info(TextFormat::GREEN . "Everything Running fine i think :P");
+		$this->registerCommands();
 	}
+	public function registerCommands(){
+		$this->getServer()->getCommandMap()->register("fly", new FlyCommand($this));
+	}
+			
 	public function getLanguage() : BaseLang {
 		return $this->baseLang;
 	}
