@@ -14,7 +14,7 @@ class Alerts extends PluginTask {
         $this->plugin = $plugin;
     }
 
-    public function onRun($currentTick){
+    public function onRun(int $currentTick){
     	$this->plugin = $this->getOwner();
         $input = array(
         "§7• Tip » Vote at ______ to get crate keys and coins.",
