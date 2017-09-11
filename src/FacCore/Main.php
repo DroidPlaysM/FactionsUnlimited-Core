@@ -21,9 +21,12 @@ use pocketmine\utils\TextFormat;
 class Main extends PluginBase implements Listener {
 	/** @var BaseLang $baseLang */
 	private $baseLang = null;
+	/** @var Config $IPLocks */
+	private $IPLocks;
 	public function onLoad() {
 		$this->getLogger()->notice(TextFormat::GREEN . "Starting Factions Core");
 		$this->saveDefaultConfig();
+		$this->IPLocks = new Config($this->getDataFolder()."IPLocker.yml");
 		//Messages
 		$lang = $this->getConfig()->get("language", BaseLang::FALLBACK_LANGUAGE);
 		$this->baseLang = new BaseLang($lang, $this->getFile() . "resources/");
@@ -49,6 +52,9 @@ class Main extends PluginBase implements Listener {
 	}
 	public function getLanguage() : BaseLang {
 		return $this->baseLang;
+	}
+	public function getIPLocks() : Config {
+		return $this->IPLocks;
 	}
 	public function onDisable() {
 		$this->getLogger()->notice(TextFormat::RED ."Shutting down Factions Core");
