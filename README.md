@@ -1,1 +1,1 @@
-# [![FactionsUnlimited-Core v1.0 Beta]
+# [FactionsUnlimited-Core v1.0 Beta]
