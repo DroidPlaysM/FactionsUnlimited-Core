@@ -29,6 +29,7 @@ class Main extends PluginBase implements Listener {
 		//TODO: Alerts system
 		//Tasks
 		$this->getServer()->getScheduler()->scheduleDelayedTask(new AutoRestartTask($this), 20 * 60 * 60 * 12); // Delay: 12 Hours
+		$this->getServer()->getScheduler()->scheduleRepeatingTask(new Alerts($this), 2000);
 		//TODO: other tasks
 		//Commands
 
