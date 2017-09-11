@@ -2,8 +2,10 @@
 namespace FacCore\Events;
 
 use FacCore\Main;
+use pocketmine\command\Command;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerPreLoginEvent;
+use pocketmine\event\server\ServerCommandEvent;
 
 class EventListener implements Listener {
 	private $plugin;
@@ -31,6 +33,35 @@ class EventListener implements Listener {
 					$ev->setKickMessage("This username can only join from a few set IP addresses.\nNo hacking accounts here :P"); //TODO move message to multi-lang
 				}
 			}
+		}
+	}
+
+	/**
+	 * @priority HIGHEST
+	 * @ignoreCancelled true
+	 *
+	 * @param ServerCommandEvent $ev
+	 */
+	public function onServerCommand(ServerCommandEvent $ev) {
+		if($ev->isCancelled())
+			return;
+		$text = $ev->getCommand();
+		$arr = explode(" ", $text);
+		$cmd = $arr[0];
+		array_shift($arr);
+		/** @var Command $command */
+		foreach($this->plugin->getServer()->getCommandMap()->getCommands() as $command) {
+			if(strtolower($command->getName()) === strtolower($cmd))
+				return;
+			foreach($command->getAliases() as $alias) {
+				if(strtolower($alias) === strtolower($cmd))
+					return;
+			}
+		}
+		$ev->setCancelled();
+		$this->plugin->getServer()->getPluginManager()->callEvent($event = new ServerChatEvent($this->plugin, $text));
+		if(!$event->isCancelled()) {
+			$this->plugin->getServer()->broadcastMessage($this->plugin->getServer()->getLanguage()->translateString("chat.type.text", [$event->getTitle(), $event->getMessage()]));
 		}
 	}
 }
