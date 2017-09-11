@@ -16,6 +16,8 @@ This is a Core for Factions Unlimited server.
 - [ ] Finish Main
 - [ ]  Add commands
   - [ ]  warp
+  - [ ]  Rules
+  - [ ]  HelpPage
   - [x]  fly
   - [ ] Tpa
 - [ ] Finish RestartEvent
