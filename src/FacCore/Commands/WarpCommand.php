@@ -12,10 +12,10 @@ use pocketmine\utils\TextFormat;
 
 class WarpCommand extends PluginCommand {
 	public function __construct(Main $owner) {
-		parent::__construct($this->getPlugin()->getLanguage()->get("warp.name"), $owner);
-		$this->setUsage($this->getPlugin()->getLanguage()->get("warp.usage"));
+		parent::__construct($owner->getLanguage()->get("warp.name"), $owner);
+		$this->setUsage($owner->getLanguage()->get("warp.usage"));
 		$this->setPermission("core.command.warp.tp");
-		$this->setDescription($this->getPlugin()->getLanguage()->get("warp.desc"));
+		$this->setDescription($owner->getLanguage()->get("warp.desc"));
 	}
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$this->testPermission($sender) or !$sender instanceof Player) {

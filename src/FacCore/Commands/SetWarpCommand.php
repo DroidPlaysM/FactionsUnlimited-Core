@@ -10,10 +10,10 @@ use pocketmine\plugin\Plugin;
 
 class SetWarpCommand extends PluginCommand {
 	public function __construct(Main $owner) {
-		parent::__construct($this->getPlugin()->getLanguage()->get("setwarp.name"), $owner);
-		$this->setUsage($this->getPlugin()->getLanguage()->get("setwarp.usage"));
+		parent::__construct($owner->getLanguage()->get("setwarp.name"), $owner);
+		$this->setUsage($owner->getLanguage()->get("setwarp.usage"));
 		$this->setPermission("core.command.warp.add");
-		$this->setDescription($this->getPlugin()->getLanguage()->get("setwarp.desc"));
+		$this->setDescription($owner->getLanguage()->get("setwarp.desc"));
 	}
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$this->testPermission($sender) or !$sender instanceof Player) {

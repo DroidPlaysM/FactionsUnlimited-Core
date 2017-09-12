@@ -11,10 +11,10 @@ use pocketmine\utils\TextFormat;
 
 class FlyCommand extends PluginCommand {
 	public function __construct(Main $owner) {
-		parent::__construct($this->getPlugin()->getLanguage()->get("fly.name"), $owner);
-		$this->setUsage($this->getPlugin()->getLanguage()->get("fly.usage"));
+		parent::__construct($owner->getLanguage()->get("fly.name"), $owner);
+		$this->setUsage($owner->getLanguage()->get("fly.usage"));
 		$this->setPermission("core.command.fly");
-		$this->setDescription($this->getPlugin()->getLanguage()->get("fly.desc"));
+		$this->setDescription($owner->getLanguage()->get("fly.desc"));
 	}
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$this->testPermission($sender) or !$sender instanceof Player) {

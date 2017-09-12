@@ -10,11 +10,11 @@ use pocketmine\plugin\Plugin;
 
 class RemoveWarpCommand extends PluginCommand {
 	public function __construct(Main $owner) {
-		parent::__construct($this->getPlugin()->getLanguage()->get("removewarp.name"), $owner);
-		$this->setUsage($this->getPlugin()->getLanguage()->get("removewarp.usage"));
+		parent::__construct($owner->getLanguage()->get("removewarp.name"), $owner);
+		$this->setUsage($owner->getLanguage()->get("removewarp.usage"));
 		$this->setPermission("core.command.warp.remove");
-		$this->setDescription($this->getPlugin()->getLanguage()->get("removewarp.desc"));
-		$this->setAliases([$this->getPlugin()->getLanguage()->get("removewarp.alias")]);
+		$this->setDescription($owner->getLanguage()->get("removewarp.desc"));
+		$this->setAliases([$owner->getLanguage()->get("removewarp.alias")]);
 	}
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$this->testPermission($sender)) {
