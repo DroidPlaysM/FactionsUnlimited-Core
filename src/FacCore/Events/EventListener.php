@@ -5,6 +5,7 @@ use FacCore\Main;
 
 use pocketmine\command\Command;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\server\ServerCommandEvent;
 
@@ -63,6 +64,21 @@ class EventListener implements Listener {
 		$this->plugin->getServer()->getPluginManager()->callEvent($event = new ServerChatEvent($this->plugin, $text));
 		if(!$event->isCancelled()) {
 			$this->plugin->getServer()->broadcastMessage($this->plugin->getServer()->getLanguage()->translateString("chat.type.text", [$event->getTitle(), $event->getMessage()]));
+		}
+	}
+
+	/**
+	 * @priority MONITOR
+	 * @ignoreCancelled
+	 *
+	 * @param PlayerChatEvent $ev
+	 */
+	public function onChat(PlayerChatEvent $ev) {
+		if($ev->isCancelled())
+			return;
+		$player = $ev->getPlayer();
+		if(!$player->hasPermission("core.chat.unfiltered")) {
+			$ev->setMessage($this->plugin->filterProfanity($ev->getMessage()));
 		}
 	}
 }

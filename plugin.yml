@@ -1,4 +1,5 @@
 name: FactionsUnlimitedCore
+prefix: CORE
 authors:
  - DroidPlaysM
  - jasonwynn10
@@ -7,6 +8,10 @@ api:
  - 3.0.0-ALPHA7
  - 3.0.0-ALPHA8
 version: 0.1.0
+website: "https://github.com/DroidPlaysM/FactionsUnlimited-Core"
+load: STARTUP
+extensions:
+ - mbstring
 permissions:
   core:
     default: false
@@ -29,3 +34,10 @@ permissions:
             default: true
           core.command.fly:
             default: op
+      core.chat:
+        default: op
+        children:
+          core.chat.unfiltered:
+            default: op
+          core.chat.colored:
+            default: true
