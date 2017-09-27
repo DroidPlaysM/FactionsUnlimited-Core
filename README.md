@@ -1,29 +1,8 @@
 # FactionsUnlimited-Core v1.0 Beta
+## This project is now private all updates will not be pushed to GitHub.
 
 This is a Core for Factions Unlimited server.
 
 > You may use but Please give credit to us.
 >
 > We only support Pocketmine-MP (pmmp) sorry spoons.
-
-## Features
-
-
-
-
-
-#### TODO List:
-- [ ] Finish Main
-- [ ]  Add commands
-  - [ ]  warp
-  - [ ]  Rules
-  - [ ]  HelpPage
-  - [x]  fly
-  - [ ] Tpa
-  - [ ]  feed
-  - [ ]  spawn
-- [ ] Finish RestartEvent
-- [x] Finish Alerts
-- [ ] Add HealthBar
-- [ ] Add BossBar
-- [ ] Add chatFilter
